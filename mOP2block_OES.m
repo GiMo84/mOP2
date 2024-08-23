@@ -178,6 +178,8 @@ classdef mOP2block_OES < mOP2block
 									case 2
 										dataType = ['ni' repmat('f', 1, 7-3+1)];
 								end
+							case 94 % nonlinear CBEAM
+								dataType = ['ni' repmat('cffff', 1, 4) 'i' repmat('cffff', 1, 4)];
 							case {33 74} % CQUAD4, CTRIA3
 								switch mOP2block.functionCodes(data(recordID).TCODE, 7)
 									case 0
@@ -186,6 +188,15 @@ classdef mOP2block_OES < mOP2block
 										dataType = ['n' repmat('f', 1, 15-2+1)];
 									case 2
 										dataType = ['n' repmat('f', 1, 9-2+1)];
+								end
+							case {34} % BAR
+								switch mOP2block.functionCodes(data(recordID).TCODE, 7)
+									case 0
+										dataType = ['n' repmat('f', 1, 16-2+1)];
+									case 1
+										dataType = ['n' repmat('f', 1, 19-2+1)];
+									case 2
+										dataType = ['n' repmat('f', 1, 10-2+1)];
 								end
 							case {144} % QUAD144
 								switch mOP2block.functionCodes(data(recordID).TCODE, 7)
